@@ -1,11 +1,10 @@
 pipeline {
-	
- //Define all variables
-  def app1_name = 'user-management-api'
-  def app1_image_tag = "${env.REPOSITORY}/${app1_name}:v${env.BUILD_NUMBER}"
-  def app1_dockerfile_name = 'Dockerfile-userManagementApi'
-  def app1_container_name = 'user-management-api'
-
+  environment {
+    app1_name = "user-management-api"
+    app1_image_tag = "${env.REPOSITORY}/${app1_name}:v${env.BUILD_NUMBER}"
+    app1_dockerfile_name = "Dockerfile-userManagementApi"
+    app1_container_name = "user-management-api"
+  }
   agent any
 
   stages {
@@ -34,6 +33,7 @@ pipeline {
         }
         
       }
+
     
       //Stage 7: Deploy Application on K8s
       stage('Deploy Application on K8s') {
