@@ -17,10 +17,8 @@ pipeline {
     
       stage("Build image") {
         steps{
-          script {
-            container('docker'){
+          script{
               sh("docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} .")
-            }
           }
         }
       }
