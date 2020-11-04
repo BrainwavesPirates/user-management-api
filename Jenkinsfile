@@ -18,8 +18,10 @@ pipeline {
       stage("Build image") {
         steps{
           script {
+            container('docker'){
               sh("docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} .")
             }
+          }
         }
       }
     
@@ -27,25 +29,27 @@ pipeline {
       stage('Push Docker Image to Docker Registry') {
         steps{
           script {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-            credentialsId: env.DOCKER_CREDENTIALS_ID,
-            usernameVariable: 'USERNAME',
-            passwordVariable: 'PASSWORD']]) {
-              docker.withRegistry(env.DOCEKR_REGISTRY, env.DOCKER_CREDENTIALS_ID) {
-                sh("docker push ${app1_image_tag}")
-              }
-            }
-          }
-        }
+            container('docker'){
+              withCredentials([[$class: 'UsernamePasswordMultiBinding',
+              credentialsId: env.DOCKER_CREDENTIALS_ID,
+              usernameVariable: 'USERNAME',
+              passwordVariable: 'PASSWORD']]) {
+                docker.withRegistry(env.DOCEKR_REGISTRY, env.DOCKER_CREDENTIALS_ID) {
+                  sh("docker push ${app1_image_tag}")
+                }
+             }
+           }
+         }
+       }
         
       }
 
     
       //Stage 7: Deploy Application on K8s
       stage('Deploy Application on K8s') {
-        container('kubectl'){
-          steps{
-            script {
+         steps{
+          script {
+            container('kubectl'){
               withKubeConfig([credentialsId: env.K8s_CREDENTIALS_ID,
               serverUrl: env.K8s_SERVER_URL,
               contextName: env.K8s_CONTEXT_NAME,
