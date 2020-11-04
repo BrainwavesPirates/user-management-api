@@ -6,10 +6,14 @@ pipeline {
     app1_container_name = "user-management-api"
   }
   agent any
-  tools {
-      maven 'apache-maven-3.0.1' 
-  }
   stages {
+    
+      stage('Initialize')
+      {
+          def dockerHome = tool 'MyDocker'
+          def mavenHome  = tool 'MyMaven'
+          env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+      }
 
       stage('Application Code Checkout from Git') {
         steps{
