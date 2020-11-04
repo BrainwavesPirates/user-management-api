@@ -6,7 +6,9 @@ pipeline {
     app1_container_name = "user-management-api"
   }
   agent any
-
+  tools {
+    maven 'M3'
+  }
   stages {
 
       stage('Application Code Checkout from Git') {
