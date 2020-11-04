@@ -1,27 +1,27 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: userManagementApi
+  name: user-management-api
   namespace: default
 spec:
   replicas: 1
   template:
     metadata:
-      name: userManagementApi
+      name: user-management-api
       labels:
-        app: userManagementApi
+        app: user-management-api
     spec:
       containers:
-      - image: mirna/userManagementApi:1
-        name: userManagementApi
+      - image: mirna/user-management-api:1
+        name: user-management-api
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: userManagementApi
+  name: user-management-api
 spec:
   type: ClusterIP
   ports:
   - port: 8081
   selector:
-    app: userManagementApi 
+    app: user-management-api 
