@@ -6,7 +6,7 @@ node {
 	def app2_image_tag = "${env.REPOSITORY}/${app2_name}:v${env.BUILD_NUMBER}"
 	def app1_dockerfile_name = 'Dockerfile-userManagementApi'
 	def app2_dockerfile_name = 'Dockerfile-todoui'
-	def app1_container_name = 'user-management-api'
+	def app1_container_name = 'userManagementApi'
 	def app2_container_name = 'todoui'
 	
 	//Stage 1: Checkout Code from Git
