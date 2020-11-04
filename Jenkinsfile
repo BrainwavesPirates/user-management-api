@@ -1,11 +1,8 @@
 node {
 	//Define all variables
 	def app1_name = 'user-management-api'
-	def app2_name = 'todoui'
 	def app1_image_tag = "${env.REPOSITORY}/${app1_name}:v${env.BUILD_NUMBER}"
-	def app2_image_tag = "${env.REPOSITORY}/${app2_name}:v${env.BUILD_NUMBER}"
 	def app1_dockerfile_name = 'Dockerfile-userManagementApi'
-	def app2_dockerfile_name = 'Dockerfile-todoui'
 	def app1_container_name = 'user-management-api'
 	def app2_container_name = 'todoui'
 	
