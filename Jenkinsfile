@@ -2,8 +2,8 @@ node {
 	
 	//Define all variables
 	def dockerHome = tool 'MyDocker'
-    def mavenHome  = tool 'MyMaven'
-    env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+    	def mavenHome  = tool 'MyMaven'
+    	env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
 	def app1_name = 'user-management-api'
 	def app1_image_tag = "${env.REPOSITORY}/${app1_name}:v${env.BUILD_NUMBER}"
 	def app1_dockerfile_name = 'Dockerfile-userManagementApi'
