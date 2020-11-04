@@ -14,14 +14,31 @@ pipeline {
           checkout scm
         }
       }
+
+      //Stage 4: Build with mvn
+      stage('Build with Maven') {
+        steps{
+            script {
+              container('maven'){
+                dir ("./${app1_name}") {
+                  
+                  sh ("mvn -B -DskipTests clean package")
+                }
+              }
+            }
+        }
+      }
     
       stage("Build image") {
         steps{
-          script{
+          script {
+            container('docker'){
               sh("docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} .")
+            }
           }
         }
       }
+
     
       //Stage 6: Push the Image to a Docker Registry
       stage('Push Docker Image to Docker Registry') {
