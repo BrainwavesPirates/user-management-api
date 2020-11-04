@@ -15,18 +15,6 @@ node {
 		
 	}
 	
-	
-	
-	//Stage 4: Build with mvn
-	stage('Build with Maven') {
-		container('maven'){
-			dir ("./${app1_name}") {
-				
-				sh ("mvn -B -DskipTests clean package")
-			}
-		}
-	}
-	
 
 	//Stage 5: Build Docker Image	
 	stage('Build Docker Image') {
