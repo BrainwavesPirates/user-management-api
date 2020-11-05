@@ -1,7 +1,7 @@
 pipeline {
   environment {
     dockerHome = tool "MyDocker"
-    env.PATH = "${dockerHome}/bin:${env.PATH}"
+    PATH = "${dockerHome}/bin:${env.PATH}"
     app1_name = "user-management-api"
     app1_image_tag = "${env.REPOSITORY}/${app1_name}:v${env.BUILD_NUMBER}"
     app1_dockerfile_name = "Dockerfile-userManagementApi"
