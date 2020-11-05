@@ -13,7 +13,7 @@ pipeline {
   }  
   agent {
     kubernetes {
-      label 'spring-user-demo'
+      label 'spring-user-demo332'
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
