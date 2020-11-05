@@ -13,7 +13,7 @@ pipeline {
   }  
   agent {
     kubernetes {
-      label 'spring-petclinic-demo'
+      label 'Default-pod'
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
@@ -30,9 +30,6 @@ spec:
     command:
     - cat
     tty: true
-    volumeMounts:
-      - mountPath: "/root/.m2"
-        name: m2
   - name: docker
     image: docker:latest
     command:
@@ -45,9 +42,6 @@ spec:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
-    - name: m2
-      persistentVolumeClaim:
-        claimName: m2
 """
 }
    }
