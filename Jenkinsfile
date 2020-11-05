@@ -13,7 +13,7 @@ pipeline {
   }  
   agent {
     kubernetes {
-      label 'Default-pod'
+      label 'spring-petclinic-demo'
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
@@ -42,6 +42,7 @@ spec:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
+"""
 }
    }
 
@@ -57,7 +58,10 @@ spec:
       stage('Build with Maven') {
         steps{
             script {
-                  sh ("mvn -B -DskipTests clean package")
+            container('maven') {
+                  sh """
+                        mvn -B -DskipTests clean package
+                   """
             }
         }
       }
@@ -66,7 +70,9 @@ spec:
         steps{
           script {
             container('docker'){
-              sh("docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} .")
+              sh """
+                  docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} .
+               """
             }
           }
         }
