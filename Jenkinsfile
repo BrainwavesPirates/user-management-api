@@ -6,7 +6,9 @@ pipeline {
     app1_container_name = "user-management-api"
   }
   
-  agent any
+  agent {
+    docker 'circleci/node:9.3-stretch-browsers'
+  }
   
   tools {  
    maven 'MyMaven'  
@@ -32,9 +34,7 @@ pipeline {
       stage("Build image") {
         steps{
           script {
-            container('docker'){
               sh("docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} .")
-            }
           }
         }
       }
