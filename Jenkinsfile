@@ -16,7 +16,9 @@ node {
 	
 	//Stage 4: Build with mvn
 	stage('Build with Maven') {
-		sh ("mvn -B -DskipTests clean package")
+		container('maven'){
+		 	sh ("mvn -B -DskipTests clean package")
+		}
 	}
 	
 
