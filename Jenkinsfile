@@ -20,11 +20,15 @@ pipeline {
 
       //Stage 4: Build with mvn
       stage('Build with Maven') {
+        agent {
+            docker {
+              image 'maven:3.6.3-jdk-11'
+              args '-v $HOME/.m2:/root/.m2'
+            }
+        }
         steps{
             script {
-              container('maven'){
                   sh ("mvn -B -DskipTests clean package")
-              }
             }
         }
       }
