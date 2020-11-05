@@ -34,8 +34,9 @@ pipeline {
       stage("Build image") {
         steps{
           script {
-              sh 'apk update && apk install docker'
+            container('docker'){
               sh("docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} .")
+            }
           }
         }
       }
