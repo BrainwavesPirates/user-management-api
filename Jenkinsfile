@@ -6,12 +6,12 @@ pipeline {
     app1_container_name = "user-management-api"
   }
   
-  agent {
-      docker {
-        image 'maven:3-alpine'
-        args '-v $HOME/.m2:/root/.m2'
-      }
-  }
+  agent any
+  
+  tools {  
+   docker 'MyDocker'  
+   maven 'MyMaven'  
+  }  
 
   stages {
 
