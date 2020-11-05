@@ -10,8 +10,8 @@ pipeline {
   
   tools {  
    maven 'MyMaven'  
-  }  
-  # agent any 
+  }
+  
   agent {
     kubernetes {
       label 'user-management-api'
