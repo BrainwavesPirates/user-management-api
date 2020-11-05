@@ -42,9 +42,19 @@ spec:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
+  imagePullSecrets:
+    - name: jenkins-pull-secret
 """
-}
-   }
+    }
+  }
+  
+  options {
+    timeout(time: 20, unit: 'MINUTES')
+  }
+
+  environment{
+    TERM = 'xterm-256color'
+  }
 
   stages {
 
