@@ -13,7 +13,7 @@ pipeline {
   }  
   agent {
     kubernetes {
-      label 'spring-petclinic-demo'
+      label 'spring-user-demo'
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
@@ -58,11 +58,12 @@ spec:
       stage('Build with Maven') {
         steps{
             script {
-            container('maven') {
-                  sh """
-                        mvn -B -DskipTests clean package
-                   """
-            }
+              container('maven') {
+                    sh """
+                          mvn -B -DskipTests clean package
+                     """
+              }
+          }
         }
       }
     
