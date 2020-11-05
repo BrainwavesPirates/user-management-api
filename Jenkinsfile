@@ -24,7 +24,7 @@ pipeline {
         component: ci
       spec:
         # Use service account that can deploy to all namespaces
-        serviceAccountName: cd-jenkins
+        serviceAccountName: default
         containers:
         - name: maven
           image: maven:latest
