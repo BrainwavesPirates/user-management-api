@@ -1,14 +1,14 @@
 pipeline {
   environment {
+    dockerHome = tool 'MyDocker'
+    env.PATH = "${dockerHome}/bin:${env.PATH}"
     app1_name = "user-management-api"
     app1_image_tag = "${env.REPOSITORY}/${app1_name}:v${env.BUILD_NUMBER}"
     app1_dockerfile_name = "Dockerfile-userManagementApi"
     app1_container_name = "user-management-api"
   }
   
-  agent {
-    docker 'circleci/node:9.3-stretch-browsers'
-  }
+  agent any
   
   tools {  
    maven 'MyMaven'  
