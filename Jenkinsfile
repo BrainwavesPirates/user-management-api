@@ -8,6 +8,9 @@ pipeline {
     app1_container_name = "user-management-api"
   }
   
+  tools {  
+   maven 'MyMaven'  
+  }  
   agent any 
 
   stages {
@@ -20,9 +23,6 @@ pipeline {
 
       //Stage 4: Build with mvn
       stage('Build with Maven') {
-        agent {
-            docker { image 'maven:3-alpine' }
-        }
         steps{
             script {
                   sh ("mvn -B -DskipTests clean package")
