@@ -23,17 +23,8 @@ pipeline {
       //Stage 4: Build with mvn
       stage('Build with Maven') {
         steps{
-            script {
-              container('maven'){
-                dir ("./${app1_name}") {
-                  
+            script {             
                   sh ("mvn -B -DskipTests clean package")
-                }
-                dir ("./${app2_name}") {
-                  
-                  sh ("mvn -B -DskipTests clean package")
-                }
-              }
             }
         }
       }
