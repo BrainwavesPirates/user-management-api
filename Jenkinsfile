@@ -11,7 +11,6 @@ pipeline {
   tools {  
    maven 'MyMaven'  
   }  
-  # agent any 
   agent {
     kubernetes {
       label 'spring-petclinic-demo'
