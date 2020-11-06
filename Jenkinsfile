@@ -11,7 +11,14 @@ pipeline {
   tools {  
    maven 'MyMaven'  
   }
-  agent any
+  agent {
+    kubernetes {
+      label 'promo-app'  // all your pods will be named with this prefix, followed by a unique id
+      idleMinutes 5  // how long the pod will live after no jobs have run on it
+      yamlFile 'build-pod.yaml'  // path to the pod definition relative to the root of our project 
+      defaultContainer 'maven'  // define a default container if more than a few stages use it, will default to jnlp container
+    }
+  }
   
   stages {
 
@@ -26,9 +33,7 @@ pipeline {
         steps{
             script {
               container('maven') {
-                    sh """
-                          mvn -B -DskipTests clean package
-                     """
+                    sh "mvn -B -DskipTests clean package"
               }
           }
         }
@@ -38,9 +43,7 @@ pipeline {
         steps{
           script {
             container('docker'){
-              sh """
-                  docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} .
-               """
+              sh "docker build -f ${app1_dockerfile_name} -t ${app1_image_tag} ."
             }
           }
         }
