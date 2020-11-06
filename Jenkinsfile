@@ -11,7 +11,8 @@ pipeline {
   tools {  
    maven 'MyMaven'  
   }
-
+  agent any
+  
   stages {
 
       stage('Application Code Checkout from Git') {
